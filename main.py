@@ -20,7 +20,7 @@ def on_button_b():
     if count_ab == 2:
         second_num += 1
     if count_ab == 1:
-        signs_count == signs_count - 1 
+        signs_count = signs_count + 1 
         
 def change_mode():
     global count_ab
@@ -43,5 +43,18 @@ def calculate():
         input.on_button_pressed(Button.B, on_button_b)
         basic.show_string(signs[signs_count%len(signs)])
         input.on_button_pressed(Button.AB, change_mode)
-
+    else: 
+        znak = signs[signs_count%len(signs)]
+        if znak == "+":
+            basic.show_number(first_num + second_num)
+        if znak == "-":
+            basic.show_number(first_num - second_num)
+        if znak == "*":
+            basic.show_number(first_num * second_num)
+        if znak == "/":
+            if second_num == 0:
+                basic.show_string("divide by zero")
+            else:
+                basic.show_number(first_num / second_num)
+        
 basic.forever(calculate)
