@@ -1,4 +1,4 @@
-signs = "+-*/"
+signs = "+-*/^"
 first_num = 0
 second_num = 0
 count_ab = 0
@@ -10,8 +10,9 @@ def on_button_a():
         first_num = first_num - 1
     if count_ab == 2:
         second_num -= 1
-    if count_ab == 1: 
-        signs_count = signs_count - 1 
+    if count_ab == 1:
+        if signs_count > 0:
+            signs_count = signs_count - 1 
 
 def on_button_b():
     global first_num, second_num, count_ab, signs_count
@@ -51,10 +52,13 @@ def calculate():
             basic.show_number(first_num - second_num)
         if znak == "*":
             basic.show_number(first_num * second_num)
+        if znak == "^":
+            basic.show_number(first_num ** second_num)
         if znak == "/":
             if second_num == 0:
                 basic.show_string("divide by zero")
             else:
-                basic.show_number(first_num / second_num)
-        
-basic.forever(calculate)
+                basic.show_number(first_num / second_num) 
+#basic.forever(calculate) 
+while True:
+    calculate()

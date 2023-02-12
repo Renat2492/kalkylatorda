@@ -1,4 +1,4 @@
-let signs = "+-*/"
+let signs = "+-*/^"
 let first_num = 0
 let second_num = 0
 let count_ab = 0
@@ -14,7 +14,10 @@ function on_button_a() {
     }
     
     if (count_ab == 1) {
-        signs_count = signs_count - 1
+        if (signs_count > 0) {
+            signs_count = signs_count - 1
+        }
+        
     }
     
 }
@@ -40,7 +43,7 @@ function change_mode() {
     count_ab += 1
 }
 
-basic.forever(function calculate() {
+function calculate() {
     let znak: string;
     
     if (count_ab == 0) {
@@ -72,6 +75,10 @@ basic.forever(function calculate() {
             basic.showNumber(first_num * second_num)
         }
         
+        if (znak == "^") {
+            basic.showNumber(first_num ** second_num)
+        }
+        
         if (znak == "/") {
             if (second_num == 0) {
                 basic.showString("divide by zero")
@@ -83,4 +90,9 @@ basic.forever(function calculate() {
         
     }
     
-})
+}
+
+// basic.forever(calculate) 
+while (true) {
+    calculate()
+}
